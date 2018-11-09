@@ -210,7 +210,7 @@ class Ooth {
             console.log('logout!')
             const user = req.user
             this.sendStatus(req, {})
-            req.logout()
+            await req.logout()
             if (this.onLogout) {
                 this.onLogout(user)
             }
