@@ -209,17 +209,17 @@ class Ooth {
         post(this.route, '/logout', requireLogged, async (req, res) => {
             console.log('logout!')
             const user = req.user
-            const status = this.sendStatus(req, {})
-            const logout = req.logout()
+            const status = await this.sendStatus(req, {})
+            const logout = await req.logout()
             console.log("WHAT ARE THESE", status, logout)
             if (this.onLogout) {
-                this.onLogout(user)
+                await this.onLogout(user)
+                res.send({message: 'Logged out'})
             }
             console.log('about to logout!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
             // return {
             //     message: 'Logged out'
             // }
-            res.send({message: 'Logged out'})
         })
 
         if (this.standalone) {
