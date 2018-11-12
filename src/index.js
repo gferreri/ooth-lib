@@ -245,7 +245,7 @@ class Ooth {
                 this.connections[req.session.id] = []
             }
             this.connections[req.session.id].push(ws)
-            
+
             if (req.user) {
                 ws.send(JSON.stringify({
                     user: this.getProfile(req.user)
