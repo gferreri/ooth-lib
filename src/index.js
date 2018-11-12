@@ -207,11 +207,9 @@ class Ooth {
             }
         })
         post(this.route, '/logout', requireLogged, async (req, res) => {
-            console.log('logout!')
             const user = req.user
             this.sendStatus(req, {})
             req.logout()
-            console.log('about to logout!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
             if (this.onLogout) {
                 await this.onLogout(user)
                 return {
@@ -243,12 +241,10 @@ class Ooth {
         }
 
         this.route.ws('/status', (ws, req) => {
-            console.log('checkin STATUS!!!!!!!!!!!!!!!!')
             if (!this.connections[req.session.id]) {
                 this.connections[req.session.id] = []
             }
             this.connections[req.session.id].push(ws)
-            console.log('STATUS out', req.user)
             if (req.user) {
                 ws.send(JSON.stringify({
                     user: this.getProfile(req.user)
