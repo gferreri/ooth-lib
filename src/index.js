@@ -211,9 +211,13 @@ class Ooth {
             this.sendStatus(req, {})
             req.logout()
             if (this.onLogout) {
-                await this.onLogout(user)
-                return {
-                    message: 'Logged out'
+                try{
+                    await this.onLogout(user)
+                    return {
+                        message: 'Logged out'
+                    }
+                } catch (error){
+                    throw error;
                 }
             } else {
                 return {
